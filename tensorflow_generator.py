@@ -6,9 +6,11 @@ from keras.datasets import mnist, cifar10, cifar100
 import keras
 from keras import backend as K
 import tensorflow as tf
-from keras.backend.tensorflow_backend import set_session
-from keras.backend.tensorflow_backend import clear_session
-from keras.backend.tensorflow_backend import get_session
+from keras.backend import set_session
+from keras.backend import clear_session
+from keras.backend import get_session
+from tensorflow.core.protobuf.config_pb2 import ConfigProto
+from tensorflow.python.client.session import Session
 import json
 import time
 from keras.preprocessing.image import ImageDataGenerator
@@ -67,8 +69,8 @@ def reset_keras():
     sess.close()
 
     # use the same config as you used to create the session
-    config = tf.ConfigProto() #allow_soft_placement=True, log_device_placement=True)
-    set_session(tf.Session(config=config))
+    config = ConfigProto() #allow_soft_placement=True, log_device_placement=True)
+    set_session(Session(config=config))
         
 
 class TensorflowGenerator(object):
@@ -133,7 +135,7 @@ class TensorflowGenerator(object):
             self.params = self.model.nb_params
             self.training_time = training_time
             self.accuracy = self.model.accuracy
-            self.history = (history.history['acc'], history.history['val_acc'])
+            self.history = (history.history['accuracy'], history.history['val_accuracy'])
 
     @property
     def keras_model(self):

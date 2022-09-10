@@ -10,7 +10,7 @@ from keras.optimizers import SGD
 
 from .mutation.mutable_model import MutableModel
 
-from keras.utils import multi_gpu_model
+# from keras.utils import multi_gpu_model
 from tensorflow.python.client import device_lib
 
 from .block import Block
@@ -140,7 +140,7 @@ class KerasFeatureModel(MutableModel):
                     gpu_devices = [device for device in local_device_protos if device.device_type=="GPU"]
                     if len(gpu_devices) <2:
                         raise Exception()
-                    model = multi_gpu_model(model, gpus=len(gpu_devices))
+                    # model = multi_gpu_model(model, gpus=len(gpu_devices))
                 except Exception as e:
                     print("multi gpu not available")
                     KerasFeatureModel.use_multigpu = False

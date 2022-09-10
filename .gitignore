@@ -11,3 +11,4 @@ plots/*.png
 *.sh
 NASNet/*
 model_graphs/*
+env/

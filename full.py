@@ -29,7 +29,7 @@ def main(target, min_index=0, max_index=0, filter_indices=[], datasets=None,epoc
                 print("product {0}".format(index))
 
                 if index >= min_index and (len(filter_indices)==0 or index in filter_indices):
-                        f = open("{0}{1}_{2}.json".format(output_folder, target, index), "w")
+                        f = open("{0}{1}_{2}.json".format(output_folder, target[2:], index), "w")
                         str_ = json.dumps(product)
                         f.write(str_)
                         f.close()
@@ -69,7 +69,7 @@ def init(argv):
     if not os.path.isdir(output_folder):
         os.mkdir(output_folder)
         
-    main(input_file, datasets=datasets, epochs=training_epochs, depth=depth, output_folder=output_folder)
+    main(target=input_file, datasets=datasets, epochs=training_epochs, depth=depth, output_folder=output_folder)
 
 if __name__ == "__main__":
     init(sys.argv[1:])
